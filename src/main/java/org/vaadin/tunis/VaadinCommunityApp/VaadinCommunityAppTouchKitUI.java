@@ -34,7 +34,7 @@ import com.vaadin.ui.UI;
  */
 @SuppressWarnings("serial")
 @Widgetset("org.vaadin.tunis.VaadinCommunityApp.gwt.VaadinCommunityAppWidgetSet")
-@Theme("touchkit")
+@Theme("VCApp")
 // Cache static application files so as the application can be started
 // and run even when the network is down.
 @CacheManifestEnabled

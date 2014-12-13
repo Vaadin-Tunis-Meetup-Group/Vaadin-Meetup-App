@@ -42,6 +42,7 @@ public class MembersView extends NavigationView {
 			}
 			photo.setWidth("50px");
 			photo.setHeight("50px");
+			photo.addStyleName("circular");
 			RowOfData rowOfData = new RowOfData(photo, new Label(
 					member.getName()),member);
 			rowOfData.addLayoutClickListener(new LayoutClickListener() {
