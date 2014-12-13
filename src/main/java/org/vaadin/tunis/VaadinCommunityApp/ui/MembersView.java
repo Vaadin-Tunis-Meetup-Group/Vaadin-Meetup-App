@@ -25,7 +25,7 @@ public class MembersView extends NavigationView {
 	static String userIcon = "../../icons/user.png";
 
 	public MembersView(String groupUrlName) {
-		setCaption("List of Members");
+		setCaption("Members");
 		final VerticalComponentGroup content = new VerticalComponentGroup();
 		content.setSizeFull();
 
