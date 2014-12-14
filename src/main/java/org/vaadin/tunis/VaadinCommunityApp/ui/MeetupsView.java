@@ -5,7 +5,6 @@ import java.util.List;
 import meetup.Group;
 
 import org.vaadin.tunis.VaadinCommunityApp.services.MeetupsService;
-import org.vaadin.tunis.VaadinCommunityApp.services.MemberService;
 import org.vaadin.tunis.VaadinCommunityApp.ui.composite.RowOfData;
 
 import com.vaadin.addon.touchkit.ui.NavigationView;
@@ -17,7 +16,6 @@ import com.vaadin.server.ThemeResource;
 import com.vaadin.ui.CssLayout;
 import com.vaadin.ui.Embedded;
 import com.vaadin.ui.Label;
-import com.vaadin.ui.Notification;
 
 @SuppressWarnings("serial")
 public class MeetupsView extends NavigationView {
@@ -43,13 +41,14 @@ public class MeetupsView extends NavigationView {
 			photo.setWidth("50px");
 			photo.setHeight("50px");
 			RowOfData rowOfData = new RowOfData(photo, new Label(
-					meetupGroup.getName()),meetupGroup);
+					meetupGroup.getName()), meetupGroup);
 			rowOfData.addLayoutClickListener(new LayoutClickListener() {
 
 				@Override
 				public void layoutClick(LayoutClickEvent event) {
-					String groupUrlName = ((Group)((RowOfData)event.getComponent()).getObject()).getGroupUrlName();
-					getNavigationManager().navigateTo(new MembersView(groupUrlName));
+					getNavigationManager().navigateTo(
+							new MeetupInfoView((Group) ((RowOfData) event
+									.getComponent()).getObject()));
 
 				}
 			});
