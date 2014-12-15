@@ -1,4 +1,4 @@
-package org.vaadin.tunis.VaadinCommunityApp.services;
+package org.vaadin.tunis.VaadinCommunityApp.services.meetupapi;
 
 import meetup.ClientSettings;
 import meetup.MeetupClient;

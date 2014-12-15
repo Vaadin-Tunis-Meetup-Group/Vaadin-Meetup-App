@@ -4,7 +4,7 @@ import java.util.List;
 
 import meetup.Group;
 
-import org.vaadin.tunis.VaadinCommunityApp.services.MeetupsService;
+import org.vaadin.tunis.VaadinCommunityApp.services.meetupapi.MeetupsService;
 import org.vaadin.tunis.VaadinCommunityApp.ui.composite.RowOfData;
 
 import com.vaadin.addon.touchkit.ui.NavigationView;
