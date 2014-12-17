@@ -12,8 +12,10 @@ import com.vaadin.ui.Button.ClickListener;
 public class HomeView extends NavigationView {
 	Toolbar toolbar = new Toolbar();
 	final VerticalComponentGroup content = new VerticalComponentGroup();
+	private HomeView instance;
 
 	public HomeView() {
+		instance = this;
 		setCaption("Home");
 		content.setSizeFull();
 		setToolbar(toolbar);
@@ -24,11 +26,11 @@ public class HomeView extends NavigationView {
 		Button homeButton = new Button("Home");
 		homeButton.setIcon(FontAwesome.HOME);
 		homeButton.addClickListener(new ClickListener() {
-			
+
 			@Override
 			public void buttonClick(ClickEvent event) {
-				getNavigationManager().navigateTo(new HomeView());
-				
+				getNavigationManager().navigateTo(instance);
+
 			}
 		});
 		toolbar.addComponent(homeButton);
@@ -44,11 +46,11 @@ public class HomeView extends NavigationView {
 		Button meetupsButtons = new Button("Meetups");
 		meetupsButtons.setIcon(FontAwesome.GROUP);
 		meetupsButtons.addClickListener(new ClickListener() {
-			
+
 			@Override
 			public void buttonClick(ClickEvent event) {
 				getNavigationManager().navigateTo(new MeetupsView());
-				
+
 			}
 		});
 		toolbar.addComponent(meetupsButtons);
