@@ -5,14 +5,16 @@ import com.vaadin.addon.touchkit.ui.NavigationView;
 import com.vaadin.ui.UI;
 
 public class HomeUIBuilder {
-	NavigationManager homeNavigationManager = new NavigationManager();
+	
 
 	public static void initHomeScreen(UI home) {
-		home.setContent(getHomeComponent());
+		NavigationManager homeNavigationManager = new NavigationManager();
+		homeNavigationManager.setCurrentComponent(getHomeComponent());
+		home.setContent(homeNavigationManager);
 	}
 
 	private static NavigationView getHomeComponent() {
-
+		
 		return new HomeView();
 	}
 
