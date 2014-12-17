@@ -42,14 +42,14 @@ public class MembersView extends NavigationView {
 			photo.setHeight("50px");
 			photo.addStyleName("circular");
 			RowOfData rowOfData = new RowOfData(photo, new Label(
-					member.getName()),member);
+					member.getName()), member);
 			rowOfData.addLayoutClickListener(new LayoutClickListener() {
-				
+
 				@Override
 				public void layoutClick(LayoutClickEvent event) {
-					Notification.show(((RowOfData)event.getComponent()).getLabel().getValue());
-					
-					
+					Notification.show(((Member) ((RowOfData) event
+							.getComponent()).getObject()).getName());
+
 				}
 			});
 			content.addComponent(rowOfData);

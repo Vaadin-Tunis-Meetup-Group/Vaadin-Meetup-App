@@ -35,9 +35,17 @@ public class HomeView extends NavigationView {
 		});
 		toolbar.addComponent(homeButton);
 
-		Button newsButton = new Button("News");
-		newsButton.setIcon(FontAwesome.RSS);
-		toolbar.addComponent(newsButton);
+		Button blogsButton = new Button("Blog");
+		blogsButton.setIcon(FontAwesome.RSS);
+		blogsButton.addClickListener(new ClickListener() {
+
+			@Override
+			public void buttonClick(ClickEvent event) {
+				getNavigationManager().navigateTo(new BlogsView());
+
+			}
+		});
+		toolbar.addComponent(blogsButton);
 
 		Button calendarButton = new Button("Events");
 		calendarButton.setIcon(FontAwesome.CALENDAR);
