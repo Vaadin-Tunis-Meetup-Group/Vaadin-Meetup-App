@@ -50,6 +50,18 @@ public class HomeView extends NavigationView {
 		Button calendarButton = new Button("Events");
 		calendarButton.setIcon(FontAwesome.CALENDAR);
 		toolbar.addComponent(calendarButton);
+		
+		Button addonsButton = new Button("Addons");
+		addonsButton.setIcon(FontAwesome.PUZZLE_PIECE);
+		addonsButton.addClickListener(new ClickListener() {
+			
+			@Override
+			public void buttonClick(ClickEvent event) {
+				getNavigationManager().navigateTo(new AddonsView());
+				
+			}
+		});
+		toolbar.addComponent(addonsButton);
 
 		Button meetupsButtons = new Button("Meetups");
 		meetupsButtons.setIcon(FontAwesome.GROUP);
