@@ -30,6 +30,8 @@ public class RomeRssReader {
 		feedEntry.setTitle(entry.getTitle());
 		feedEntry.setPubDate(entry.getPublishedDate());
 		feedEntry.setDescription(entry.getDescription().getValue());
+		feedEntry.setAuthor(entry.getAuthor());
+		feedEntry.setLink(entry.getLink());
 		return feedEntry;
 	}
 

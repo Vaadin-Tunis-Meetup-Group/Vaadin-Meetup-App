@@ -6,6 +6,8 @@ public class FeedEntry {
 	private String title;
 	private String description;
 	private Date pubDate;
+	private String author;
+	private String link;
 
 	public String getTitle() {
 		return title;
@@ -29,6 +31,22 @@ public class FeedEntry {
 
 	public void setPubDate(Date pubDate) {
 		this.pubDate = pubDate;
+	}
+
+	public String getAuthor() {
+		return author;
+	}
+
+	public void setAuthor(String author) {
+		this.author = author;
+	}
+
+	public String getLink() {
+		return link;
+	}
+
+	public void setLink(String link) {
+		this.link = link;
 	}
 
 }

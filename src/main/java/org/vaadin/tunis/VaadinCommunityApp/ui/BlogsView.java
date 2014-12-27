@@ -2,16 +2,20 @@ package org.vaadin.tunis.VaadinCommunityApp.ui;
 
 import java.util.List;
 
+import org.vaadin.tunis.VaadinCommunityApp.services.DateUtil;
 import org.vaadin.tunis.VaadinCommunityApp.services.rss.FeedEntry;
 import org.vaadin.tunis.VaadinCommunityApp.services.rss.RomeRssReader;
 import org.vaadin.tunis.VaadinCommunityApp.ui.composite.RowOfData;
 
 import com.vaadin.addon.touchkit.ui.NavigationView;
 import com.vaadin.addon.touchkit.ui.VerticalComponentGroup;
-import com.vaadin.server.ThemeResource;
+import com.vaadin.server.ExternalResource;
+import com.vaadin.server.FontAwesome;
+import com.vaadin.shared.ui.label.ContentMode;
 import com.vaadin.ui.CssLayout;
-import com.vaadin.ui.Embedded;
 import com.vaadin.ui.Label;
+import com.vaadin.ui.Link;
+import com.vaadin.ui.VerticalLayout;
 
 @SuppressWarnings("serial")
 public class BlogsView extends NavigationView {
@@ -25,18 +29,43 @@ public class BlogsView extends NavigationView {
 
 		List<FeedEntry> feedVaadinNews = RomeRssReader.getItems(rssUrl);
 		for (FeedEntry feedEntry : feedVaadinNews) {
+			Label label = new Label();
+			label.setContentMode(ContentMode.HTML);
+			StringBuilder value = new StringBuilder();
+			value.append("<div style='color:#00b4f0;'>");
+			value.append(FontAwesome.ARROW_RIGHT.getHtml());
+			value.append(" <b>");
+			value.append(feedEntry.getTitle());
+			value.append("</b></div><Br>");
+			value.append("By ");
+			value.append("<font color='#00b4f0'>");
+			value.append(feedEntry.getAuthor());
+			value.append("</font>");
+			value.append(", | ");
+			value.append("<font size='-1' color='gray'>");
+			value.append("On ");
+			value.append(DateUtil.formatDate(feedEntry.getPubDate(),
+					"dd/M/yyyy"));
+			value.append("</font>");
+			label.setValue(value.toString());
 
-			Embedded photo = new Embedded(null, new ThemeResource(blogIcon));
-			RowOfData rowOfData = new RowOfData(photo, new Label(
-					feedEntry.getTitle()), feedEntry);
-			photo.setWidth("50px");
-			photo.setHeight("50px");
-			photo.addStyleName("circular");
+			Link link = new Link("Read more", new ExternalResource(
+					feedEntry.getLink()));
+			link.setTargetName("_blank");
+			link.setIcon(FontAwesome.ANGLE_DOUBLE_RIGHT);
+			link.addStyleName("icon-after-caption");
 
+			VerticalLayout layout = new VerticalLayout();
+			layout.addComponent(label);
+			layout.addComponent(link);
+			layout.setExpandRatio(label, 1f);
+			layout.setSpacing(true);
+			layout.setSizeFull();
+
+			RowOfData rowOfData = new RowOfData(layout, feedEntry);
 			content.addComponent(rowOfData);
 		}
 		CssLayout cssLayout = new CssLayout(content);
 		setContent(cssLayout);
 	}
-
 }

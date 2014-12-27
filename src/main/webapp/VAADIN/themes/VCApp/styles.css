@@ -1,7 +1,19 @@
-.circular img{
+.circular img {
 	border-radius: 50%;
 	-webkit-border-radius: 50%;
 	-moz-border-radius: 50%;
 	-webkit-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
 	-moz-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
+}
+/* Position icon right of the link caption. */
+.icon-after-caption {
+	direction: rtl;
+}
+/* Add some padding around the icon. */
+.icon-after-caption .v-icon {
+	padding: 0 3px;
+}
+
+.icon-after-caption span {
+	text-decoration: none !important;
 }

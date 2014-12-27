@@ -23,6 +23,16 @@ public class RowOfData extends HorizontalLayout {
 		setSpacing(true);
 	}
 
+	public RowOfData(Component component, Object object) {
+		super();
+		this.setComponent(component);
+		this.setObject(object);
+		addComponent(this.component);
+		setWidth("100%");
+		setHeight("100px");
+		setSpacing(true);
+	}
+
 	public Component getComponent() {
 		return component;
 	}
@@ -45,5 +55,5 @@ public class RowOfData extends HorizontalLayout {
 
 	public void setObject(Object object) {
 		this.object = object;
-	}	
+	}
 }
