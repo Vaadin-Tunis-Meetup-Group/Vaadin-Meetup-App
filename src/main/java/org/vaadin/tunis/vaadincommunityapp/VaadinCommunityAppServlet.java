@@ -1,4 +1,4 @@
-package org.vaadin.tunis.VaadinCommunityApp;
+package org.vaadin.tunis.vaadincommunityapp;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;

@@ -1,4 +1,4 @@
-package org.vaadin.tunis.VaadinCommunityApp.services.rss;
+package org.vaadin.tunis.vaadincommunityapp.services.rss;
 
 import java.util.Date;
 

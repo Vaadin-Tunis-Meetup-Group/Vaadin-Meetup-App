@@ -1,4 +1,4 @@
-package org.vaadin.tunis.VaadinCommunityApp.services.rss;
+package org.vaadin.tunis.vaadincommunityapp.services.rss;
 
 import java.io.IOException;
 import java.net.URL;
@@ -6,14 +6,23 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
 import com.rometools.rome.feed.synd.SyndEntry;
 import com.rometools.rome.feed.synd.SyndFeed;
 import com.rometools.rome.io.SyndFeedInput;
 import com.rometools.rome.io.XmlReader;
 
 public class RomeRssReader {
+	private static final Logger LOGGER = Logger.getLogger(RomeRssReader.class
+			.getName());
+
+	private RomeRssReader() {
+		//fix sonar violation
+	}
+
 	public static List<FeedEntry> getItems(String rssUrl) {
-		List<FeedEntry> items = new ArrayList();
+		List<FeedEntry> items = new ArrayList<FeedEntry>();
 		SyndFeed feed = getFeedFromURL(rssUrl);
 		Iterator<?> iter = feed.getEntries().iterator();
 		while (iter.hasNext()) {
@@ -43,13 +52,13 @@ public class RomeRssReader {
 			xmlReader = new XmlReader(new URL(rssUrl));
 			feed = input.build(xmlReader);
 		} catch (Exception e) {
-			e.printStackTrace();
+			LOGGER.error(e);
 		} finally {
 			if (xmlReader != null) {
 				try {
 					xmlReader.close();
 				} catch (IOException e) {
-					e.printStackTrace();
+					LOGGER.error(e);
 				}
 			}
 		}

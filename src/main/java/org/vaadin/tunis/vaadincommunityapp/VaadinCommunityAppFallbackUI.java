@@ -1,4 +1,4 @@
-package org.vaadin.tunis.VaadinCommunityApp;
+package org.vaadin.tunis.vaadincommunityapp;
 
 import com.vaadin.addon.touchkit.annotations.CacheManifestEnabled;
 import com.vaadin.addon.touchkit.annotations.OfflineModeEnabled;

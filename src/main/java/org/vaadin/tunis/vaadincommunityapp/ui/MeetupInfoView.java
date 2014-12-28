@@ -1,4 +1,4 @@
-package org.vaadin.tunis.VaadinCommunityApp.ui;
+package org.vaadin.tunis.vaadincommunityapp.ui;
 
 import meetup.Group;
 

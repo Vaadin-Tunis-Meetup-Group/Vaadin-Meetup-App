@@ -1,4 +1,4 @@
-package org.vaadin.tunis.VaadinCommunityApp.services.meetupapi;
+package org.vaadin.tunis.vaadincommunityapp.services.meetupapi;
 
 import meetup.ClientSettings;
 import meetup.MeetupClient;
@@ -19,8 +19,9 @@ public class MeetupAPIServiceFactory {
 	}
 
 	public static MeetupAPIServiceFactory getInstance() {
-		if (instance == null)
+		if (instance == null) {
 			instance = new MeetupAPIServiceFactory();
+		}
 		return instance;
 	}
 

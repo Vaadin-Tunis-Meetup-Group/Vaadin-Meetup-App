@@ -1,7 +1,7 @@
-package org.vaadin.tunis.VaadinCommunityApp;
+package org.vaadin.tunis.vaadincommunityapp;
 
-import org.vaadin.tunis.VaadinCommunityApp.gwt.client.VaadinCommunityAppPersistToServerRpc;
-import org.vaadin.tunis.VaadinCommunityApp.ui.HomeUIBuilder;
+import org.vaadin.tunis.vaadincommunityapp.gwt.client.VaadinCommunityAppPersistToServerRpc;
+import org.vaadin.tunis.vaadincommunityapp.ui.HomeUIBuilder;
 
 import com.vaadin.addon.touchkit.annotations.CacheManifestEnabled;
 import com.vaadin.addon.touchkit.annotations.OfflineModeEnabled;
@@ -27,6 +27,8 @@ import com.vaadin.ui.UI;
 @PreserveOnRefresh
 public class VaadinCommunityAppTouchKitUI extends UI {
 
+	private static final int OFFLINE_MODE_TIMEOUT = 15;
+	
 	private final VaadinCommunityAppPersistToServerRpc serverRpc = new VaadinCommunityAppPersistToServerRpc() {
 		@Override
 		public void persistToServer() {
@@ -46,6 +48,6 @@ public class VaadinCommunityAppTouchKitUI extends UI {
 		offlineMode.setPersistentSessionCookie(true);
 		// Define the timeout in secs to wait when a server request is sent
 		// before falling back to offline mode.
-		offlineMode.setOfflineModeTimeout(15);
+		offlineMode.setOfflineModeTimeout(OFFLINE_MODE_TIMEOUT);
 	}
 }

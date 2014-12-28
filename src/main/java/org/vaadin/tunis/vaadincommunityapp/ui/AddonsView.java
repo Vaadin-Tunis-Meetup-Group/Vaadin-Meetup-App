@@ -1,10 +1,10 @@
-package org.vaadin.tunis.VaadinCommunityApp.ui;
+package org.vaadin.tunis.vaadincommunityapp.ui;
 
 import java.util.List;
 
-import org.vaadin.tunis.VaadinCommunityApp.services.rss.FeedEntry;
-import org.vaadin.tunis.VaadinCommunityApp.services.rss.RomeRssReader;
-import org.vaadin.tunis.VaadinCommunityApp.ui.composite.RowOfData;
+import org.vaadin.tunis.vaadincommunityapp.services.rss.FeedEntry;
+import org.vaadin.tunis.vaadincommunityapp.services.rss.RomeRssReader;
+import org.vaadin.tunis.vaadincommunityapp.ui.composite.RowOfData;
 
 import com.vaadin.addon.touchkit.ui.NavigationView;
 import com.vaadin.addon.touchkit.ui.VerticalComponentGroup;

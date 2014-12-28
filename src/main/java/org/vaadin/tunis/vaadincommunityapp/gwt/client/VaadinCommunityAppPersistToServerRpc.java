@@ -1,4 +1,4 @@
-package org.vaadin.tunis.VaadinCommunityApp.gwt.client;
+package org.vaadin.tunis.vaadincommunityapp.gwt.client;
 
 import com.vaadin.shared.communication.ServerRpc;
 

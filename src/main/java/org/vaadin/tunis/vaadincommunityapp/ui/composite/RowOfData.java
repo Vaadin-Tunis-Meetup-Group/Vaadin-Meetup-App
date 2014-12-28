@@ -1,4 +1,4 @@
-package org.vaadin.tunis.VaadinCommunityApp.ui.composite;
+package org.vaadin.tunis.vaadincommunityapp.ui.composite;
 
 import com.vaadin.ui.Component;
 import com.vaadin.ui.Embedded;

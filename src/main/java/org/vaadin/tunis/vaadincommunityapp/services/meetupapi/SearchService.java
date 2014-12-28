@@ -1,4 +1,4 @@
-package org.vaadin.tunis.VaadinCommunityApp.services.meetupapi;
+package org.vaadin.tunis.vaadincommunityapp.services.meetupapi;
 
 import java.util.List;
 

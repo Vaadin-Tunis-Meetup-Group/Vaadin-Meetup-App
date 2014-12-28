@@ -1,4 +1,4 @@
-package org.vaadin.tunis.VaadinCommunityApp.ui;
+package org.vaadin.tunis.vaadincommunityapp.ui;
 
 import com.vaadin.addon.touchkit.ui.NavigationView;
 import com.vaadin.addon.touchkit.ui.Toolbar;

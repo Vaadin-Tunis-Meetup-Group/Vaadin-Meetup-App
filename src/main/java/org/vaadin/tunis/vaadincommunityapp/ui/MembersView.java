@@ -1,11 +1,11 @@
-package org.vaadin.tunis.VaadinCommunityApp.ui;
+package org.vaadin.tunis.vaadincommunityapp.ui;
 
 import java.util.List;
 
 import meetup.Member;
 
-import org.vaadin.tunis.VaadinCommunityApp.services.meetupapi.MemberService;
-import org.vaadin.tunis.VaadinCommunityApp.ui.composite.RowOfData;
+import org.vaadin.tunis.vaadincommunityapp.services.meetupapi.MemberService;
+import org.vaadin.tunis.vaadincommunityapp.ui.composite.RowOfData;
 
 import com.vaadin.addon.touchkit.ui.NavigationView;
 import com.vaadin.addon.touchkit.ui.VerticalComponentGroup;

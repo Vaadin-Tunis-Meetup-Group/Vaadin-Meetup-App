@@ -1,4 +1,4 @@
-package org.vaadin.tunis.VaadinCommunityApp;
+package org.vaadin.tunis.vaadincommunityapp;
 
 import com.vaadin.server.UIClassSelectionEvent;
 import com.vaadin.server.UIProvider;
