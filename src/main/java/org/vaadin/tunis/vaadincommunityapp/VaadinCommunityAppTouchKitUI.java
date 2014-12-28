@@ -16,7 +16,7 @@ import com.vaadin.ui.UI;
  * The UI's "main" class
  */
 @SuppressWarnings("serial")
-@Widgetset("org.vaadin.tunis.VaadinCommunityApp.gwt.VaadinCommunityAppWidgetSet")
+@Widgetset("org.vaadin.tunis.vaadincommunityapp.gwt.VaadinCommunityAppWidgetSet")
 @Theme("VCApp")
 // Cache static application files so as the application can be started
 // and run even when the network is down.
