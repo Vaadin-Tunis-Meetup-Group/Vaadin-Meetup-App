@@ -145,7 +145,7 @@
 					</webappDirectory>
 					<hostedWebapp>${basedir}/src/main/webapp/VAADIN/widgetsets
 					</hostedWebapp>
-					<extraJvmArgs>-Xmx1g -Xss4024k</extraJvmArgs>
+					<extraJvmArgs>-Xmx512M -Xss4024k</extraJvmArgs>
 					<noServer>true</noServer>
 					<!-- Remove draftCompile when project is ready -->
 					<draftCompile>false</draftCompile>
@@ -154,7 +154,7 @@
 					<persistentunitcachedir>${project.build.directory}</persistentunitcachedir>
 					<deploy>${project.build.directory}/gwt-deploy</deploy>
 					<runTarget>http://localhost:8080/</runTarget>
-					<extraJvmArgs>-Xmx1024M -Xss4024k -XX:MaxPermSize=128m</extraJvmArgs>
+					<extraJvmArgs>-Xmx512M -Xss4024k -XX:MaxPermSize=128m</extraJvmArgs>
 					<modules>
 						<module>org.vaadin.tunis.VaadinCommunityApp.gwt.VaadinCommunityAppWidgetSet</module>
 					</modules>
