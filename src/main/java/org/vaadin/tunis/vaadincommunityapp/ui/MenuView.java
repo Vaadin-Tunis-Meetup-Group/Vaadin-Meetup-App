@@ -33,5 +33,5 @@ public class MenuView extends NavigationView {
 		content.addComponent(button);
 		content.addComponent(memberButton);
 		setContent(content);
-	};
+	}
 }
