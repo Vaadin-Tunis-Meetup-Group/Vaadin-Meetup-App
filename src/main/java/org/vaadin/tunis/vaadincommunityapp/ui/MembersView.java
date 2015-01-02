@@ -20,7 +20,7 @@ import com.vaadin.ui.Notification;
 
 @SuppressWarnings("serial")
 public class MembersView extends NavigationView {
-	static String userIcon = "../../icons/user.png";
+	private static String USER_ICON = "../../icons/user.png";
 
 	public MembersView(String groupUrlName) {
 		setCaption("Members");
@@ -33,7 +33,7 @@ public class MembersView extends NavigationView {
 		for (Member member : membersByGroupUrlName) {
 			Embedded photo;
 			if (member.getPhotoUrl() == null || member.getPhotoUrl().isEmpty()) {
-				photo = new Embedded(null, new ThemeResource(userIcon));
+				photo = new Embedded(null, new ThemeResource(USER_ICON));
 			} else {
 				photo = new Embedded(null, new ExternalResource(
 						member.getPhotoUrl()));

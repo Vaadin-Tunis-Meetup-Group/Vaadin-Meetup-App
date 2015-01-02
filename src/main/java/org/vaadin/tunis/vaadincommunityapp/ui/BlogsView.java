@@ -20,7 +20,6 @@ import com.vaadin.ui.VerticalLayout;
 @SuppressWarnings("serial")
 public class BlogsView extends NavigationView {
 	private static String rssUrl = "http://vaadin.com/blog/-/blogs/rss?_33_max=10";
-	static String blogIcon = "../../icons/blog.png";
 
 	public BlogsView() {
 		setCaption("Blogs");

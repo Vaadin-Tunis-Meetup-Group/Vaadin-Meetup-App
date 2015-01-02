@@ -18,7 +18,6 @@ import com.vaadin.ui.Label;
 @SuppressWarnings("serial")
 public class AddonsView extends NavigationView {
 	private static String rssUrl = "http://vaadin.com/directory/-/directory/rss/recent";
-	static String addonsIcon = "../../icons/addons.png";
 
 	public AddonsView() {
 		setCaption("Addons");
