@@ -18,19 +18,22 @@ public class RomeRssReader {
 			.getName());
 
 	private RomeRssReader() {
-		//fix sonar violation
+		// fix sonar violation
 	}
 
-	public static List<FeedEntry> getItems(String rssUrl) {
+	public static List<FeedEntry> getItems(String rssUrl) throws NullPointerException {
 		List<FeedEntry> items = new ArrayList<FeedEntry>();
 		SyndFeed feed = getFeedFromURL(rssUrl);
-		Iterator<?> iter = feed.getEntries().iterator();
-		while (iter.hasNext()) {
-			SyndEntry entry = (SyndEntry) iter.next();
-			FeedEntry item = transformToFeedEntry(entry);
-			items.add(item);
+		if (feed != null) {
+			Iterator<?> iter = feed.getEntries().iterator();
+			while (iter.hasNext()) {
+				SyndEntry entry = (SyndEntry) iter.next();
+				FeedEntry item = transformToFeedEntry(entry);
+				items.add(item);
+			}
+			return items;
 		}
-		return items;
+		throw new NullPointerException();
 	}
 
 	private static FeedEntry transformToFeedEntry(SyndEntry entry) {

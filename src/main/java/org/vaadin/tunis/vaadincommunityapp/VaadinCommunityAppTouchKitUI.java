@@ -27,7 +27,7 @@ import com.vaadin.ui.UI;
 @PreserveOnRefresh
 public class VaadinCommunityAppTouchKitUI extends UI {
 
-	private static final int OFFLINE_MODE_TIMEOUT = 15;
+	private static final int OFFLINE_MODE_TIMEOUT = 60;
 	
 	private final VaadinCommunityAppPersistToServerRpc serverRpc = new VaadinCommunityAppPersistToServerRpc() {
 		@Override

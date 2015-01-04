@@ -19,7 +19,7 @@ import com.vaadin.ui.Label;
 public class AddonsView extends NavigationView {
 	private static String rssUrl = "http://vaadin.com/directory/-/directory/rss/recent";
 
-	public AddonsView() {
+	public AddonsView() throws Exception{
 		setCaption("Addons");
 		final VerticalComponentGroup content = new VerticalComponentGroup();
 		content.setSizeFull();

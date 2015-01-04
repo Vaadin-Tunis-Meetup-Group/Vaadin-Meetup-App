@@ -19,41 +19,42 @@ import com.vaadin.ui.Label;
 
 @SuppressWarnings("serial")
 public class MeetupsView extends NavigationView {
-	private static String MEETUP_ICON = "../../icons/meetup-icon.png";
+	private static String MEETUP_ICON = "icons/meetup-icon.png";
 
-	public MeetupsView() {
+	public MeetupsView() throws Exception {
 
 		setCaption("Vaadin Meetups");
 		final VerticalComponentGroup content = new VerticalComponentGroup();
 		content.setSizeFull();
 
-		List<Group> allVaadinMeetups = MeetupsService.getAllVaadinMeetups();
-		for (Group meetupGroup : allVaadinMeetups) {
-			Embedded photo;
-			if (meetupGroup.getPhotoUrl() == null
-					|| meetupGroup.getPhotoUrl().isEmpty()) {
+		List<Group> allVaadinMeetups;
+			allVaadinMeetups = MeetupsService.getAllVaadinMeetups();
+			for (Group meetupGroup : allVaadinMeetups) {
+				Embedded photo;
+				if (meetupGroup.getPhotoUrl() == null
+						|| meetupGroup.getPhotoUrl().isEmpty()) {
 
-				photo = new Embedded(null, new ThemeResource(MEETUP_ICON));
-			} else {
-				photo = new Embedded(null, new ExternalResource(
-						meetupGroup.getPhotoUrl()));
-			}
-			photo.setWidth("50px");
-			photo.setHeight("50px");
-			RowOfData rowOfData = new RowOfData(photo, new Label(
-					meetupGroup.getName()), meetupGroup);
-			rowOfData.addLayoutClickListener(new LayoutClickListener() {
-
-				@Override
-				public void layoutClick(LayoutClickEvent event) {
-					getNavigationManager().navigateTo(
-							new MeetupInfoView((Group) ((RowOfData) event
-									.getComponent()).getObject()));
-
+					photo = new Embedded(null, new ThemeResource(MEETUP_ICON));
+				} else {
+					photo = new Embedded(null, new ExternalResource(
+							meetupGroup.getPhotoUrl()));
 				}
-			});
-			content.addComponent(rowOfData);
-		}
+				photo.setWidth("50px");
+				photo.setHeight("50px");
+				RowOfData rowOfData = new RowOfData(photo, new Label(
+						meetupGroup.getName()), meetupGroup);
+				rowOfData.addLayoutClickListener(new LayoutClickListener() {
+
+					@Override
+					public void layoutClick(LayoutClickEvent event) {
+						getNavigationManager().navigateTo(
+								new MeetupInfoView((Group) ((RowOfData) event
+										.getComponent()).getObject()));
+
+					}
+				});
+				content.addComponent(rowOfData);
+			}
 		CssLayout cssLayout = new CssLayout(content);
 		setContent(cssLayout);
 	}

@@ -2,23 +2,34 @@ package org.vaadin.tunis.vaadincommunityapp.ui;
 
 import com.vaadin.addon.touchkit.ui.NavigationView;
 import com.vaadin.addon.touchkit.ui.Toolbar;
-import com.vaadin.addon.touchkit.ui.VerticalComponentGroup;
 import com.vaadin.server.FontAwesome;
+import com.vaadin.server.ThemeResource;
+import com.vaadin.ui.AbsoluteLayout;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
+import com.vaadin.ui.Embedded;
+import com.vaadin.ui.Notification;
 
 @SuppressWarnings("serial")
 public class HomeView extends NavigationView {
 	Toolbar toolbar = new Toolbar();
-	final VerticalComponentGroup content = new VerticalComponentGroup();
+	static String ERROR_MESSAGE = "Please check your internet connection";
+
 	private HomeView instance;
+	private static String HOME_SCREEN_IMG = "images/vaadin-tunis.png";
+	private AbsoluteLayout layout = new AbsoluteLayout();
 
 	public HomeView() {
 		instance = this;
 		setCaption("Home");
-		content.setSizeFull();
 		setToolbar(toolbar);
+		Embedded img = new Embedded(null, new ThemeResource(HOME_SCREEN_IMG));
+		img.setSizeFull();
+		layout.setSizeFull();
+		layout.addComponent(img, "left: 15%; right: 15%;"
+				+ "top: 25%; bottom: 25%;");
+		setContent(layout);
 		initToolbar();
 	}
 
@@ -41,7 +52,12 @@ public class HomeView extends NavigationView {
 
 			@Override
 			public void buttonClick(ClickEvent event) {
-				getNavigationManager().navigateTo(new BlogsView());
+				try {
+					getNavigationManager().navigateTo(new BlogsView());
+				} catch (Exception e) {
+					Notification.show(ERROR_MESSAGE,
+							Notification.TYPE_WARNING_MESSAGE);
+				}
 
 			}
 		});
@@ -53,7 +69,12 @@ public class HomeView extends NavigationView {
 
 			@Override
 			public void buttonClick(ClickEvent event) {
-				getNavigationManager().navigateTo(new EventsView());
+				try {
+					getNavigationManager().navigateTo(new EventsView());
+				} catch (Exception e) {
+					Notification.show(ERROR_MESSAGE,
+							Notification.TYPE_WARNING_MESSAGE);
+				}
 
 			}
 		});
@@ -65,7 +86,12 @@ public class HomeView extends NavigationView {
 
 			@Override
 			public void buttonClick(ClickEvent event) {
-				getNavigationManager().navigateTo(new AddonsView());
+				try {
+					getNavigationManager().navigateTo(new AddonsView());
+				} catch (Exception e) {
+					Notification.show(ERROR_MESSAGE,
+							Notification.TYPE_WARNING_MESSAGE);
+				}
 
 			}
 		});
@@ -77,7 +103,12 @@ public class HomeView extends NavigationView {
 
 			@Override
 			public void buttonClick(ClickEvent event) {
-				getNavigationManager().navigateTo(new MeetupsView());
+				try {
+					getNavigationManager().navigateTo(new MeetupsView());
+				} catch (Exception e) {
+					Notification.show(ERROR_MESSAGE,
+							Notification.TYPE_WARNING_MESSAGE);
+				}
 
 			}
 		});

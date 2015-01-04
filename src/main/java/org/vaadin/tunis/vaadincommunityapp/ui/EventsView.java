@@ -4,7 +4,6 @@ import java.util.Date;
 import java.util.List;
 import java.util.Locale;
 
-import org.vaadin.tunis.vaadincommunityapp.services.DateUtil;
 import org.vaadin.tunis.vaadincommunityapp.services.google.calendar.GoogleCalendarService;
 
 import com.vaadin.addon.touchkit.ui.NavigationView;
@@ -16,7 +15,7 @@ import com.vaadin.ui.components.calendar.event.BasicEvent;
 @SuppressWarnings("serial")
 public class EventsView extends NavigationView {
 
-	public EventsView() {
+	public EventsView() throws Exception{
 		setCaption("Events");
 		final VerticalComponentGroup content = new VerticalComponentGroup();
 		content.setSizeFull();

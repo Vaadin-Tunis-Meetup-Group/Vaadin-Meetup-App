@@ -4,7 +4,6 @@ import java.util.List;
 
 import meetup.Member;
 
-import org.vaadin.tunis.vaadincommunityapp.services.meetupapi.MemberService;
 import org.vaadin.tunis.vaadincommunityapp.ui.composite.RowOfData;
 
 import com.vaadin.addon.touchkit.ui.NavigationView;
@@ -20,17 +19,14 @@ import com.vaadin.ui.Notification;
 
 @SuppressWarnings("serial")
 public class MembersView extends NavigationView {
-	private static String USER_ICON = "../../icons/user.png";
+	private static String USER_ICON = "icons/user.png";
 
-	public MembersView(String groupUrlName) {
+	public MembersView(List<Member> members) {
 		setCaption("Members");
 		final VerticalComponentGroup content = new VerticalComponentGroup();
 		content.setSizeFull();
 
-		List<Member> membersByGroupUrlName = MemberService
-				.getMembersByGroupUrlName(groupUrlName);
-
-		for (Member member : membersByGroupUrlName) {
+		for (Member member : members) {
 			Embedded photo;
 			if (member.getPhotoUrl() == null || member.getPhotoUrl().isEmpty()) {
 				photo = new Embedded(null, new ThemeResource(USER_ICON));
