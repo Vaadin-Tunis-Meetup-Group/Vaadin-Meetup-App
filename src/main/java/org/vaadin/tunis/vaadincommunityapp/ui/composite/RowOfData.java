@@ -1,23 +1,26 @@
 package org.vaadin.tunis.vaadincommunityapp.ui.composite;
 
+import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Component;
-import com.vaadin.ui.Embedded;
 import com.vaadin.ui.HorizontalLayout;
 
 @SuppressWarnings("serial")
 public class RowOfData extends HorizontalLayout {
-	private Embedded photo;
-	private Component component;
+	private Component leftComponent;
+	private Component rightComponent;
 	private Object object;
 
-	public RowOfData(Embedded photo, Component component, Object object) {
+	public RowOfData(Component leftComponent, Component rightComponent,
+			Object object) {
 		super();
-		this.setPhoto(photo);
-		this.setComponent(component);
+		this.setLeftComponent(leftComponent);
+		this.setRightComponent(rightComponent);
 		this.setObject(object);
-		addComponent(photo);
-		addComponent(component);
-		setExpandRatio(component, 1f);
+		addComponent(leftComponent);
+		setComponentAlignment(leftComponent, Alignment.MIDDLE_CENTER);
+		addComponent(rightComponent);
+		setComponentAlignment(rightComponent, Alignment.MIDDLE_LEFT);
+		setExpandRatio(rightComponent, 1f);
 		setHeight("50px");
 		setWidth("100%");
 		setSpacing(true);
@@ -25,28 +28,37 @@ public class RowOfData extends HorizontalLayout {
 
 	public RowOfData(Component component, Object object) {
 		super();
-		this.setComponent(component);
+		this.setLeftComponent(component);
 		this.setObject(object);
-		addComponent(this.component);
+		addComponent(this.leftComponent);
 		setWidth("100%");
 		setHeight("100px");
 		setSpacing(true);
 	}
 
-	public Component getComponent() {
-		return component;
+	public RowOfData(Component component) {
+		super();
+		this.setLeftComponent(component);
+		addComponent(this.leftComponent);
+		setWidth("100%");
+		setHeight("18px");
+		setSpacing(true);
 	}
 
-	public void setComponent(Component component) {
-		this.component = component;
+	public Component getRightComponent() {
+		return rightComponent;
 	}
 
-	public Embedded getPhoto() {
-		return photo;
+	public void setRightComponent(Component component) {
+		this.rightComponent = component;
 	}
 
-	public void setPhoto(Embedded photo) {
-		this.photo = photo;
+	public Component getLeftComponent() {
+		return leftComponent;
+	}
+
+	public void setLeftComponent(Component component) {
+		this.leftComponent = component;
 	}
 
 	public Object getObject() {

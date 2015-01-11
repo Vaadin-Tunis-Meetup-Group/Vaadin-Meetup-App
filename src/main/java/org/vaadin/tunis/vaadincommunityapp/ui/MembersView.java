@@ -2,7 +2,7 @@ package org.vaadin.tunis.vaadincommunityapp.ui;
 
 import java.util.List;
 
-import meetup.Member;
+import org.vaadin.tunis.vaadincommunityapp.model.Member;
 
 import org.vaadin.tunis.vaadincommunityapp.ui.composite.RowOfData;
 

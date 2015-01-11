@@ -28,6 +28,17 @@
 	border-style: solid;
 }
 
+.left-decorated-label{
+	border-image: none;
+	border-right: 0px solid #F5F5F5;
+	border-top: 0px solid #F5F5F5;
+	border-bottom: 0px solid #F5F5F5;
+	border-style: solid;
+}
+.upcoming-event-left-decorated-label{
+	border-left: 5px solid #E14F52;
+	background: white !important;
+}
 
 .passed-event-label{
 	border-bottom: 4px solid #CD5F98;
@@ -39,4 +50,24 @@
 
 .upcoming-event-label{
 	border-bottom: 4px solid #03A52A;
+}
+
+.gray-background{
+	background: #F4F4F4 !important;
+}
+
+.white-background{
+	background: white !important;
+}
+
+.gray-background .v-touchkit-componentgroup-row:before{
+	border-top: 0px solid !important;
+}
+.blue {
+	color: #00b4f0;
+}
+
+.v-touchkit-popover .closelabel {
+	margin-top: 10px;
+	text-align: center;
 }

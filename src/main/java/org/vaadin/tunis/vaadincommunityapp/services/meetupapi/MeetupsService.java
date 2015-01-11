@@ -8,10 +8,13 @@ import java.io.Reader;
 import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
-import meetup.Group;
-import meetup.Member;
+import org.vaadin.tunis.vaadincommunityapp.model.Events;
+import org.vaadin.tunis.vaadincommunityapp.model.Group;
+import org.vaadin.tunis.vaadincommunityapp.model.Member;
+import org.vaadin.tunis.vaadincommunityapp.model.Photo;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
@@ -19,61 +22,126 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 public class MeetupsService {
-	private static String TOPIC = "Vaadin";
-	private static MeetupAPIServiceFactory MEETUP_API_SERVICE = MeetupAPIServiceFactory
-			.getInstance();
+	// private static String TOPIC = "Vaadin";
+	// private static MeetupAPIServiceFactory MEETUP_API_SERVICE =
+	// MeetupAPIServiceFactory
+	// .getInstance();
 
 	private MeetupsService() {
 		// fix sonar violation
 	}
 
 	public static List<Group> getAllVaadinMeetups() throws Exception {
-		String url ="https://api.meetup.com/2/groups?&sign=true&photo-host=public&topic=vaadin&key=1ec7f3873471e53377e594d35246a5f";
+		String url = "https://api.meetup.com/2/groups?&sign=true&photo-host=public&topic=vaadin&key=1ec7f3873471e53377e594d35246a5f";
 		JsonObject jsonResponse = readJsonFromUrl(url);
-		JsonArray asJsonArray = jsonResponse.get("results")
-				.getAsJsonArray();
+		JsonArray asJsonArray = jsonResponse.get("results").getAsJsonArray();
 		List<Group> groups = new ArrayList<Group>();
 		for (JsonElement object : asJsonArray) {
 			Group group = new Group();
 			group.setName(object.getAsJsonObject().get("name").getAsString());
-			group.setGroupUrlName(object.getAsJsonObject().get("urlname").getAsString());
-			JsonElement photoElement = object.getAsJsonObject()
-					.get("group_photo");
+			group.setGroupUrlName(object.getAsJsonObject().get("urlname")
+					.getAsString());
+			JsonElement photoElement = object.getAsJsonObject().get(
+					"group_photo");
 			if (photoElement != null) {
 				group.setPhotoUrl(photoElement.getAsJsonObject()
 						.get("photo_link").getAsString());
 			}
-			group.setDescription(object.getAsJsonObject().get("description").getAsString());
+			group.setDescription(object.getAsJsonObject().get("description")
+					.getAsString());
 			groups.add(group);
 		}
 		return groups;
-		
+
 	}
 
-	public static int getPassedEvents(String groupUrlName) {
+	public static List<Events> getPassedEvents(String groupUrlName) {
 		try {
 			String url = "https://api.meetup.com/2/events?&sign=true&status=past&photo-host=public&group_urlname="
 					+ groupUrlName.toLowerCase()
 					+ "&page=100&key=1ec7f3873471e53377e594d35246a5f";
 			JsonObject jsonResponse = readJsonFromUrl(url);
-			return jsonResponse.get("results").getAsJsonArray().size();
+			List<Events> meetupEvents = new ArrayList<Events>();
+
+			JsonArray jsonArray = jsonResponse.get("results").getAsJsonArray();
+
+			for (JsonElement element : jsonArray) {
+				Events events = new Events();
+				events.setDescription(element.getAsJsonObject()
+						.get("description").getAsString());
+				events.setName(element.getAsJsonObject().get("name")
+						.getAsString());
+				events.setTime(new Date(Long.parseLong(element
+						.getAsJsonObject().get("time").getAsString())));
+				events.setRsvpCount(Integer.parseInt(element.getAsJsonObject()
+						.get("yes_rsvp_count").getAsString()));
+				meetupEvents.add(events);
+			}
+
+			return meetupEvents;
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return 0;
+		return new ArrayList<Events>();
 	}
 
-	public static int getUpcomingEvents(String groupUrlName) {
+	public static List<Events> getUpcomingEvents(String groupUrlName) {
 		try {
 			String url = "https://api.meetup.com/2/events?&sign=true&status=upcoming&photo-host=public&group_urlname="
 					+ groupUrlName.toLowerCase()
 					+ "&page=30&key=1ec7f3873471e53377e594d35246a5f";
 			JsonObject jsonResponse = readJsonFromUrl(url);
-			return jsonResponse.get("results").getAsJsonArray().size();
+			List<Events> meetupEvents = new ArrayList<Events>();
+
+			JsonArray jsonArray = jsonResponse.get("results").getAsJsonArray();
+
+			for (JsonElement element : jsonArray) {
+				Events events = new Events();
+				events.setDescription(element.getAsJsonObject()
+						.get("description").getAsString());
+				events.setName(element.getAsJsonObject().get("name")
+						.getAsString());
+				events.setTime(new Date(Long.parseLong(element
+						.getAsJsonObject().get("time").getAsString())));
+				events.setRsvpCount(Integer.parseInt(element.getAsJsonObject()
+						.get("yes_rsvp_count").getAsString()));
+				meetupEvents.add(events);
+			}
+
+			return meetupEvents;
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		return 0;
+		return new ArrayList<Events>();
+	}
+
+	public static List<Photo> getMeetupPhotos(String groupUrlName) {
+		try {
+			String url = "https://api.meetup.com/2/photos?&sign=true&photo-host=public&group_urlname="
+					+ groupUrlName.toLowerCase()
+					+ "&key=1ec7f3873471e53377e594d35246a5f";
+			JsonObject jsonResponse = readJsonFromUrl(url);
+			JsonArray asJsonArray = jsonResponse.get("results")
+					.getAsJsonArray();
+			List<Photo> photos = new ArrayList<Photo>();
+			for (JsonElement element : asJsonArray) {
+				Photo photo = new Photo();
+				photo.setMemberName(((JsonObject) element.getAsJsonObject()
+						.get("member")).get("name").getAsString());
+				photo.setPhotoLink(element.getAsJsonObject().get("photo_link")
+						.getAsString());
+				photo.setThumbLink(element.getAsJsonObject().get("thumb_link")
+						.getAsString());
+				photo.setHighresLink(element.getAsJsonObject()
+						.get("highres_link").getAsString());
+				photos.add(photo);
+			}
+			return photos;
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return new ArrayList<Photo>();
+
 	}
 
 	public static List<Member> getMeetupMembers(String groupUrlName) {

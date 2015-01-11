@@ -91,11 +91,6 @@
 			<scope>provided</scope>
 		</dependency>
 		<dependency>
-			<groupId>meetup-java-client</groupId>
-			<artifactId>meetup-java-client</artifactId>
-			<version>1.0.1</version>
-		</dependency>
-		<dependency>
 			<groupId>com.rometools</groupId>
 			<artifactId>rome</artifactId>
 			<version>1.5.0</version>
@@ -115,7 +110,11 @@
 			<artifactId>google-api-services-calendar</artifactId>
 			<version>v3-rev111-1.19.0</version>
 		</dependency>
-
+		<dependency>
+			<groupId>com.google.code.gson</groupId>
+			<artifactId>gson</artifactId>
+			<version>1.7.1</version>
+		</dependency>
 	</dependencies>
 
 	<build>

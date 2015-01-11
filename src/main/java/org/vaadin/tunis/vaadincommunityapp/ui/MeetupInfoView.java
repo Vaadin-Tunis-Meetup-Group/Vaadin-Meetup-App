@@ -3,9 +3,9 @@ package org.vaadin.tunis.vaadincommunityapp.ui;
 import java.util.ArrayList;
 import java.util.List;
 
-import meetup.Group;
-import meetup.Member;
-
+import org.vaadin.tunis.vaadincommunityapp.model.Events;
+import org.vaadin.tunis.vaadincommunityapp.model.Group;
+import org.vaadin.tunis.vaadincommunityapp.model.Member;
 import org.vaadin.tunis.vaadincommunityapp.services.meetupapi.MeetupsService;
 
 import com.vaadin.addon.touchkit.ui.NavigationView;
@@ -23,6 +23,7 @@ import com.vaadin.ui.Button.ClickListener;
 import com.vaadin.ui.Embedded;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
+import com.vaadin.ui.Notification;
 
 @SuppressWarnings("serial")
 public class MeetupInfoView extends NavigationView {
@@ -35,6 +36,8 @@ public class MeetupInfoView extends NavigationView {
 	Toolbar toolbar = new Toolbar();
 	Group meetupGroup;
 	List<Member> meetupMembers = new ArrayList<Member>();
+	List<Events> meetupPassedEvents = new ArrayList<Events>();
+	List<Events> meetupUpCommingEvents = new ArrayList<Events>();
 	final VerticalComponentGroup content = new VerticalComponentGroup();
 
 	public MeetupInfoView(Group meetup) {
@@ -93,7 +96,7 @@ public class MeetupInfoView extends NavigationView {
 		membersNumber.addStyleName("bottom-decorated-label");
 		membersNumber.addStyleName("members-number-label");
 		membersNumber.setHeight("60px");
-		
+
 		Label incomingEvent = new Label();
 		incomingEvent.setContentMode(ContentMode.HTML);
 		incomingEvent.setValue("<center>" + incomingEventContent + "<br>"
@@ -101,7 +104,7 @@ public class MeetupInfoView extends NavigationView {
 		incomingEvent.addStyleName("bottom-decorated-label");
 		incomingEvent.addStyleName("upcoming-event-label");
 		incomingEvent.setHeight("60px");
-		
+
 		headerInfoLayout.addComponent(passedEvent);
 		headerInfoLayout.addComponent(membersNumber);
 		headerInfoLayout.addComponent(incomingEvent);
@@ -133,14 +136,22 @@ public class MeetupInfoView extends NavigationView {
 	}
 
 	private int getUpcomingEvents() {
-		return MeetupsService.getUpcomingEvents(meetupGroup.getGroupUrlName());
+		if (meetupUpCommingEvents.isEmpty()) {
+			meetupUpCommingEvents = MeetupsService
+					.getUpcomingEvents(meetupGroup.getGroupUrlName());
+		}
+		return meetupUpCommingEvents.size();
 	}
 
 	/**
 	 * 
 	 */
 	private int getPassedEvents() {
-		return MeetupsService.getPassedEvents(meetupGroup.getGroupUrlName());
+		if (meetupPassedEvents.isEmpty()) {
+			meetupPassedEvents = MeetupsService.getPassedEvents(meetupGroup
+					.getGroupUrlName());
+		}
+		return meetupPassedEvents.size();
 	}
 
 	/**
@@ -172,10 +183,33 @@ public class MeetupInfoView extends NavigationView {
 
 		Button calendarButton = new Button("Calendar");
 		calendarButton.setIcon(FontAwesome.CALENDAR);
+		calendarButton.addClickListener(new ClickListener() {
+
+			@Override
+			public void buttonClick(ClickEvent event) {
+				if (meetupUpCommingEvents.isEmpty()) {
+					Notification.show(
+							"No upcoming events for " + meetupGroup.getName(),
+							Notification.TYPE_WARNING_MESSAGE);
+				} else {
+					getNavigationManager().navigateTo(
+							new MeetupEventView(meetupUpCommingEvents,
+									meetupGroup));
+				}
+			}
+		});
 		toolbar.addComponent(calendarButton);
 
 		Button photoButton = new Button("Photo");
 		photoButton.setIcon(FontAwesome.PHOTO);
+		photoButton.addClickListener(new ClickListener() {
+			
+			@Override
+			public void buttonClick(ClickEvent event) {
+				getNavigationManager().navigateTo(new MeetupPhotosView(meetupGroup));
+				
+			}
+		});
 		toolbar.addComponent(photoButton);
 
 		Button membersButtons = new Button("Members");
