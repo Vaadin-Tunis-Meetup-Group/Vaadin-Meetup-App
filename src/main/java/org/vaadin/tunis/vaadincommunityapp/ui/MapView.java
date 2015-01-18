@@ -61,7 +61,7 @@ public class MapView extends CssLayout implements PositionCallback,
 		mapBoxTiles.setDetectRetina(true);
 		map.addLayer(mapBoxTiles);
 
-		map.setAttributionPrefix("Powered by <a href=\"https://github.com/Vaadin-Tunis-Meetup-Group/\">Vaadin Tunis</a> — &copy; <a href='http://vaadin.com'>Vaadin</a> contributors");
+		map.setAttributionPrefix("Powered by <a href=\"https://github.com/Vaadin-Tunis-Meetup-Group/\">Vaadin Tunis</a> — &copy; <a href='http://vaadin.com/meetup'>Vaadin</a> meetups");
 
 		map.setImmediate(true);
 

@@ -46,12 +46,10 @@ public class HomeView extends NavigationView {
 			@Override
 			public void buttonClick(ClickEvent event) {
 				try {
-					blogsButton.setEnabled(false);
 					getNavigationManager().navigateTo(new BlogsView());
 
 				} catch (Exception e) {
 					Notification.show(ERROR_MESSAGE, Type.WARNING_MESSAGE);
-					blogsButton.setEnabled(true);
 				}
 
 			}
