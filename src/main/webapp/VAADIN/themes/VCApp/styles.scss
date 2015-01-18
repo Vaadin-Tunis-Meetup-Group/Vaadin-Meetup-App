@@ -71,3 +71,36 @@
 	margin-top: 10px;
 	text-align: center;
 }
+
+
+.mapview {
+	padding: 0 !important;
+}
+.mapview .locatebutton {
+	position: absolute;
+	top: 10px;
+	right: 10px;
+	background: white;
+	border: none;
+	border-radius: 2px;
+	-webkit-box-shadow: none;
+}
+
+.mapview .locatebutton .v-button-wrap {
+	background: transparent;
+	-webkit-box-shadow: none;
+	padding-top: 1px;
+	border-radius: 4px;
+}
+
+
+.mapview .locatebutton .v-button-wrap:BEFORE{
+	color: #fff;
+	position: fixed;
+	left: 3px;
+	top: -8px;
+	font-size: 24px;
+	font-weight: normal;
+	text-shadow: none;
+}
+

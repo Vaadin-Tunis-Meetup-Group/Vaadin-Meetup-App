@@ -28,7 +28,10 @@ import com.vaadin.ui.UI;
 public class VaadinCommunityAppTouchKitUI extends UI {
 
 	private static final int OFFLINE_MODE_TIMEOUT = 60;
-	
+	private double currentLatitude = 60.452541;
+
+	private double currentLongitude = 22.30083;
+
 	private final VaadinCommunityAppPersistToServerRpc serverRpc = new VaadinCommunityAppPersistToServerRpc() {
 		@Override
 		public void persistToServer() {
@@ -49,5 +52,25 @@ public class VaadinCommunityAppTouchKitUI extends UI {
 		// Define the timeout in secs to wait when a server request is sent
 		// before falling back to offline mode.
 		offlineMode.setOfflineModeTimeout(OFFLINE_MODE_TIMEOUT);
+	}
+
+	public static VaadinCommunityAppTouchKitUI getApp() {
+		return (VaadinCommunityAppTouchKitUI) UI.getCurrent();
+	}
+
+	public double getCurrentLatitude() {
+		return currentLatitude;
+	}
+
+	public void setCurrentLatitude(double currentLatitude) {
+		this.currentLatitude = currentLatitude;
+	}
+
+	public double getCurrentLongitude() {
+		return currentLongitude;
+	}
+
+	public void setCurrentLongitude(double currentLongitude) {
+		this.currentLongitude = currentLongitude;
 	}
 }

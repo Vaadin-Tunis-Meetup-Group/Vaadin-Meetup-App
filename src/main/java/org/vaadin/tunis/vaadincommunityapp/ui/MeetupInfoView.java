@@ -24,6 +24,7 @@ import com.vaadin.ui.Embedded;
 import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Notification;
+import com.vaadin.ui.Notification.Type;
 
 @SuppressWarnings("serial")
 public class MeetupInfoView extends NavigationView {
@@ -190,7 +191,7 @@ public class MeetupInfoView extends NavigationView {
 				if (meetupUpCommingEvents.isEmpty()) {
 					Notification.show(
 							"No upcoming events for " + meetupGroup.getName(),
-							Notification.TYPE_WARNING_MESSAGE);
+							Type.WARNING_MESSAGE);
 				} else {
 					getNavigationManager().navigateTo(
 							new MeetupEventView(meetupUpCommingEvents,

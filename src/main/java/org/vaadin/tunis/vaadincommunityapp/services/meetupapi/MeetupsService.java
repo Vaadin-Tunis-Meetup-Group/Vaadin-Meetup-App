@@ -49,6 +49,8 @@ public class MeetupsService {
 			}
 			group.setDescription(object.getAsJsonObject().get("description")
 					.getAsString());
+			group.setLatitude(object.getAsJsonObject().get("lat").getAsString());
+			group.setLongitude(object.getAsJsonObject().get("lon").getAsString());
 			groups.add(group);
 		}
 		return groups;

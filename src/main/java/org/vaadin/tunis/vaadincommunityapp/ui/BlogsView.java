@@ -16,6 +16,7 @@ import com.vaadin.ui.CssLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Link;
 import com.vaadin.ui.Notification;
+import com.vaadin.ui.Notification.Type;
 import com.vaadin.ui.VerticalLayout;
 
 @SuppressWarnings("serial")
@@ -68,7 +69,7 @@ public class BlogsView extends NavigationView {
 			}
 		} catch (NullPointerException e) {
 			Notification.show("Please check your internet connection",
-					Notification.TYPE_WARNING_MESSAGE);
+					Type.WARNING_MESSAGE);
 		}
 		CssLayout cssLayout = new CssLayout(content);
 		setContent(cssLayout);
