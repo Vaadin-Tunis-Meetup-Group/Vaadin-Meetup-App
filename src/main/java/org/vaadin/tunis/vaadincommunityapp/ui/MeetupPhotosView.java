@@ -32,33 +32,53 @@ public class MeetupPhotosView extends NavigationView {
 		int photoWidth = screenWidth / 5;
 		int i = 0;
 		if (!meetupPhotos.isEmpty()) {
-			do {
-				for (int j = 0; j < 5; j++) {
-					final Photo photo = meetupPhotos.get((i) * 4 + j);
-					ExternalResource externalPhoto = new ExternalResource(
-							photo.getThumbLink());
-					Embedded embedded = new Embedded(null, externalPhoto);
-					embedded.setHeight(photoWidth - 10 + "px");
-					embedded.setWidth(photoWidth - 10 + "px");
-					embedded.addClickListener(new ClickListener() {
-
-						@Override
-						public void click(ClickEvent event) {
-							Embedded photoView = new Embedded(null,new ExternalResource(photo.getPhotoLink()));
-							PopoverPhotoContent photoContent = new PopoverPhotoContent(
-									photoView);
-							photoContent.showRelativeTo(instance);
-
-						}
-					});
+			if (meetupPhotos.size() < 5) {
+				int j = 0;
+				for (Photo photo : meetupPhotos) {
+					Embedded embedded = addPhotoToGrid(photoWidth, photo);
 					gridLayout.addComponent(embedded, j, i);
 					gridLayout.setComponentAlignment(embedded,
 							Alignment.MIDDLE_CENTER);
 					gridLayout.setSpacing(true);
+					j++;
 				}
-				i++;
-			} while (rows > i);
+
+			} else {
+				do {
+					for (int j = 0; j < 5; j++) {
+						final Photo photo = meetupPhotos.get((i) * 4 + j);
+						Embedded embedded = addPhotoToGrid(photoWidth, photo);
+						gridLayout.addComponent(embedded, j, i);
+						gridLayout.setComponentAlignment(embedded,
+								Alignment.MIDDLE_CENTER);
+						gridLayout.setSpacing(true);
+					}
+					i++;
+				} while (rows > i);
+			}
 		}
 		setContent(gridLayout);
+	}
+
+	private Embedded addPhotoToGrid(int photoWidth, final Photo photo) {
+		ExternalResource externalPhoto = new ExternalResource(
+				photo.getThumbLink());
+		Embedded embedded = new Embedded(null, externalPhoto);
+		embedded.setHeight(photoWidth - 10 + "px");
+		embedded.setWidth(photoWidth - 10 + "px");
+		embedded.addClickListener(new ClickListener() {
+
+			@Override
+			public void click(ClickEvent event) {
+				Embedded photoView = new Embedded(null,
+						new ExternalResource(photo
+								.getPhotoLink()));
+				PopoverPhotoContent photoContent = new PopoverPhotoContent(
+						photoView);
+				photoContent.showRelativeTo(instance);
+
+			}
+		});
+		return embedded;
 	}
 }

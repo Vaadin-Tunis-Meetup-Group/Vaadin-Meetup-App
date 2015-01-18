@@ -45,12 +45,13 @@ public class MeetupsService {
 					"group_photo");
 			if (photoElement != null) {
 				group.setPhotoUrl(photoElement.getAsJsonObject()
-						.get("photo_link").getAsString());
+						.get("thumb_link").getAsString());
 			}
 			group.setDescription(object.getAsJsonObject().get("description")
 					.getAsString());
 			group.setLatitude(object.getAsJsonObject().get("lat").getAsString());
 			group.setLongitude(object.getAsJsonObject().get("lon").getAsString());
+			group.setMembers(object.getAsJsonObject().get("members").getAsInt());
 			groups.add(group);
 		}
 		return groups;

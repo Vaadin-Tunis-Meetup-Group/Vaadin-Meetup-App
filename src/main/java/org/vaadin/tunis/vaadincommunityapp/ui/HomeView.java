@@ -17,11 +17,12 @@ public class HomeView extends NavigationView {
 	public final Button addonsButton = new Button("Addons");
 	public final Button meetupsButtons = new Button("Meetups");
 	private HomeView instance;
+	MapView mapView = new MapView();
 
 	public HomeView() {
 		instance = this;
 		setCaption("Home");
-		setContent(new MapView());
+		setContent(mapView);
 		setToolbar(toolbar);
 		initToolbar();
 	}
@@ -39,7 +40,6 @@ public class HomeView extends NavigationView {
 		});
 		toolbar.addComponent(homeButton);
 
-		
 		blogsButton.setIcon(FontAwesome.RSS);
 		blogsButton.addClickListener(new ClickListener() {
 
@@ -48,8 +48,7 @@ public class HomeView extends NavigationView {
 				try {
 					blogsButton.setEnabled(false);
 					getNavigationManager().navigateTo(new BlogsView());
-					
-					
+
 				} catch (Exception e) {
 					Notification.show(ERROR_MESSAGE, Type.WARNING_MESSAGE);
 					blogsButton.setEnabled(true);
@@ -76,7 +75,6 @@ public class HomeView extends NavigationView {
 		// });
 		// toolbar.addComponent(calendarButton);
 
-		
 		addonsButton.setIcon(FontAwesome.PUZZLE_PIECE);
 		addonsButton.addClickListener(new ClickListener() {
 
@@ -92,14 +90,14 @@ public class HomeView extends NavigationView {
 		});
 		toolbar.addComponent(addonsButton);
 
-		
 		meetupsButtons.setIcon(FontAwesome.GROUP);
 		meetupsButtons.addClickListener(new ClickListener() {
 
 			@Override
 			public void buttonClick(ClickEvent event) {
 				try {
-					getNavigationManager().navigateTo(new MeetupsView());
+					getNavigationManager().navigateTo(
+							new MeetupsView(mapView.getAllVaadinMeetups()));
 				} catch (Exception e) {
 					Notification.show(ERROR_MESSAGE, Type.WARNING_MESSAGE);
 				}

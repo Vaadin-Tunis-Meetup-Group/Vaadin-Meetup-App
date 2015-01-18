@@ -35,6 +35,7 @@ public class MapView extends CssLayout implements PositionCallback,
 	private LMap map;
 	private Button locatebutton;
 	private LMarker you;
+	private List<Group> allVaadinMeetups;
 
 	@Override
 	public void attach() {
@@ -60,7 +61,7 @@ public class MapView extends CssLayout implements PositionCallback,
 		mapBoxTiles.setDetectRetina(true);
 		map.addLayer(mapBoxTiles);
 
-		map.setAttributionPrefix("Powered by <a href=\"leafletjs.com\">Leaflet</a> — &copy; <a href='http://osm.org/copyright'>OpenStreetMap</a> contributors");
+		map.setAttributionPrefix("Powered by <a href=\"https://github.com/Vaadin-Tunis-Meetup-Group/\">Vaadin Tunis</a> — &copy; <a href='http://vaadin.com'>Vaadin</a> contributors");
 
 		map.setImmediate(true);
 
@@ -82,7 +83,7 @@ public class MapView extends CssLayout implements PositionCallback,
 
 	public final void updateMarkers() {
 		try {
-			List<Group> allVaadinMeetups = MeetupsService.getAllVaadinMeetups();
+			allVaadinMeetups = MeetupsService.getAllVaadinMeetups();
 			Iterator<Component> iterator = map.iterator();
 			Collection<Component> remove = new ArrayList<Component>();
 			while (iterator.hasNext()) {
@@ -145,6 +146,14 @@ public class MapView extends CssLayout implements PositionCallback,
 	@Override
 	public void onClick(LeafletClickEvent event) {
 
+	}
+
+	public List<Group> getAllVaadinMeetups() {
+		return allVaadinMeetups;
+	}
+
+	public void setAllVaadinMeetups(List<Group> allVaadinMeetups) {
+		this.allVaadinMeetups = allVaadinMeetups;
 	}
 
 }

@@ -31,6 +31,7 @@ public class PopoverPhotoContent extends Popover {
 				close();
 			}
 		});
+		wrapper.addStyleName("close-button-background");
 		layout.addComponent(wrapper);
 		layout.setWidth(Page.getCurrent().getBrowserWindowWidth(), Unit.PIXELS);
 		layout.setHeight(Page.getCurrent().getBrowserWindowHeight(),

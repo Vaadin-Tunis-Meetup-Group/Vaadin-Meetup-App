@@ -21,13 +21,13 @@ import com.vaadin.ui.Label;
 public class MeetupsView extends NavigationView {
 	private static String MEETUP_ICON = "icons/meetup-icon.png";
 
-	public MeetupsView() throws Exception {
+	public MeetupsView(List<Group> allVaadinMeetups) throws Exception {
 
 		setCaption("Vaadin Meetups");
 		final VerticalComponentGroup content = new VerticalComponentGroup();
 		content.setSizeFull();
-
-		List<Group> allVaadinMeetups = MeetupsService.getAllVaadinMeetups();
+		if (allVaadinMeetups.isEmpty())
+			allVaadinMeetups = MeetupsService.getAllVaadinMeetups();
 		for (Group meetupGroup : allVaadinMeetups) {
 			Embedded photo;
 			if (meetupGroup.getPhotoUrl() == null
