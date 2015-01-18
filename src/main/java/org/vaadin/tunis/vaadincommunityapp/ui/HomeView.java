@@ -53,21 +53,22 @@ public class HomeView extends NavigationView {
 		});
 		toolbar.addComponent(blogsButton);
 
-		Button calendarButton = new Button("Events");
-		calendarButton.setIcon(FontAwesome.CALENDAR);
-		calendarButton.addClickListener(new ClickListener() {
-
-			@Override
-			public void buttonClick(ClickEvent event) {
-				try {
-					getNavigationManager().navigateTo(new EventsView());
-				} catch (Exception e) {
-					Notification.show(ERROR_MESSAGE, Type.WARNING_MESSAGE);
-				}
-
-			}
-		});
-		toolbar.addComponent(calendarButton);
+		// Calendar api cause memory heap
+		// Button calendarButton = new Button("Events");
+		// calendarButton.setIcon(FontAwesome.CALENDAR);
+		// calendarButton.addClickListener(new ClickListener() {
+		//
+		// @Override
+		// public void buttonClick(ClickEvent event) {
+		// try {
+		// getNavigationManager().navigateTo(new EventsView());
+		// } catch (Exception e) {
+		// Notification.show(ERROR_MESSAGE, Type.WARNING_MESSAGE);
+		// }
+		//
+		// }
+		// });
+		// toolbar.addComponent(calendarButton);
 
 		Button addonsButton = new Button("Addons");
 		addonsButton.setIcon(FontAwesome.PUZZLE_PIECE);
