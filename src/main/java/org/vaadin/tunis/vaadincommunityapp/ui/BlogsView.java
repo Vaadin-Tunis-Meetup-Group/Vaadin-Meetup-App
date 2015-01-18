@@ -73,5 +73,6 @@ public class BlogsView extends NavigationView {
 		}
 		CssLayout cssLayout = new CssLayout(content);
 		setContent(cssLayout);
+		((HomeView)getNavigationManager().getParent()).blogsButton.setEnabled(true);
 	}
 }

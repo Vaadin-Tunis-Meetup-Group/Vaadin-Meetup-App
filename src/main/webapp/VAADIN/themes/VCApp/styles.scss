@@ -93,7 +93,21 @@
 	border-radius: 4px;
 }
 
-
+.v-touchkit-navbar{
+	background: #1E1913 !important;
+}
+.v-touchkit-toolbar .v-button{
+	background: #1E1913 !important;
+}
+.v-touchkit-toolbar .v-button {
+	color: #FF9900 !important;
+}
+.v-touchkit-navbutton-forward, .v-touchkit-navbar .v-touchkit-navbutton{
+	color:white !important;
+}
+.v-touchkit-navbar .v-touchkit-navbar-caption{
+	color:#FF9900 !important;
+}
 .mapview .locatebutton .v-button-wrap:BEFORE{
 	color: #fff;
 	position: fixed;
