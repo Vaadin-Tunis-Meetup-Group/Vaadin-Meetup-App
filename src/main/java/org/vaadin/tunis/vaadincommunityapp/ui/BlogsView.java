@@ -1,5 +1,6 @@
 package org.vaadin.tunis.vaadincommunityapp.ui;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.vaadin.tunis.vaadincommunityapp.services.DateUtil;
@@ -23,54 +24,68 @@ import com.vaadin.ui.VerticalLayout;
 public class BlogsView extends NavigationView {
 	private static String rssUrl = "http://vaadin.com/blog/-/blogs/rss?_33_max=10";
 
-	public BlogsView() throws Exception{
-		setCaption("Blogs");
-		final VerticalComponentGroup content = new VerticalComponentGroup();
-		content.setSizeFull();
+	final VerticalComponentGroup content = new VerticalComponentGroup();
+	List<FeedEntry> feedVaadinNews = new ArrayList<FeedEntry>();
 
-		try {
-			List<FeedEntry> feedVaadinNews = RomeRssReader.getItems(rssUrl);
-			for (FeedEntry feedEntry : feedVaadinNews) {
-				Label label = new Label();
-				label.setContentMode(ContentMode.HTML);
-				StringBuilder value = new StringBuilder();
-				value.append("<div style='color:#00b4f0;'>");
-				value.append(FontAwesome.ARROW_RIGHT.getHtml());
-				value.append(" <b>");
-				value.append(feedEntry.getTitle());
-				value.append("</b></div><Br>");
-				value.append("By ");
-				value.append("<font color='#00b4f0'>");
-				value.append(feedEntry.getAuthor());
-				value.append("</font>");
-				value.append(", | ");
-				value.append("<font size='-1' color='gray'>");
-				value.append("On ");
-				value.append(DateUtil.formatDate(feedEntry.getPubDate(),
-						"dd/M/yyyy"));
-				value.append("</font>");
-				label.setValue(value.toString());
+	@Override
+	public void attach() {
+		loadRssBlogs();
+		super.attach();
+	}
 
-				Link link = new Link("Read more", new ExternalResource(
-						feedEntry.getLink()));
-				link.setTargetName("_blank");
-				link.setIcon(FontAwesome.ANGLE_DOUBLE_RIGHT);
-				link.addStyleName("icon-after-caption");
+	private void loadRssBlogs() {
+		if (feedVaadinNews.isEmpty()) {
+			try {
+				feedVaadinNews = RomeRssReader.getItems(rssUrl);
+				for (FeedEntry feedEntry : feedVaadinNews) {
+					Label label = new Label();
+					label.setContentMode(ContentMode.HTML);
+					StringBuilder value = new StringBuilder();
+					value.append("<div style='color:#00b4f0;'>");
+					value.append(FontAwesome.ARROW_RIGHT.getHtml());
+					value.append(" <b>");
+					value.append(feedEntry.getTitle());
+					value.append("</b></div><Br>");
+					value.append("By ");
+					value.append("<font color='#00b4f0'>");
+					value.append(feedEntry.getAuthor());
+					value.append("</font>");
+					value.append(", | ");
+					value.append("<font size='-1' color='gray'>");
+					value.append("On ");
+					value.append(DateUtil.formatDate(feedEntry.getPubDate(),
+							"dd/M/yyyy"));
+					value.append("</font>");
+					label.setValue(value.toString());
 
-				VerticalLayout layout = new VerticalLayout();
-				layout.addComponent(label);
-				layout.addComponent(link);
-				layout.setExpandRatio(label, 1f);
-				layout.setSpacing(true);
-				layout.setSizeFull();
+					Link link = new Link("Read more", new ExternalResource(
+							feedEntry.getLink()));
+					link.setTargetName("_blank");
+					link.setIcon(FontAwesome.ANGLE_DOUBLE_RIGHT);
+					link.addStyleName("icon-after-caption");
 
-				RowOfData rowOfData = new RowOfData(layout, feedEntry);
-				content.addComponent(rowOfData);
+					VerticalLayout layout = new VerticalLayout();
+					layout.addComponent(label);
+					layout.addComponent(link);
+					layout.setExpandRatio(label, 1f);
+					layout.setSpacing(true);
+					layout.setSizeFull();
+
+					RowOfData rowOfData = new RowOfData(layout, feedEntry);
+					content.addComponent(rowOfData);
+				}
+			} catch (NullPointerException e) {
+				Notification.show(
+						"Service unavailable, Please try again later",
+						Type.WARNING_MESSAGE);
 			}
-		} catch (NullPointerException e) {
-			Notification.show("Please check your internet connection",
-					Type.WARNING_MESSAGE);
 		}
+	}
+
+	public BlogsView() {
+		setCaption("Blogs");
+
+		content.setSizeFull();
 		CssLayout cssLayout = new CssLayout(content);
 		setContent(cssLayout);
 	}

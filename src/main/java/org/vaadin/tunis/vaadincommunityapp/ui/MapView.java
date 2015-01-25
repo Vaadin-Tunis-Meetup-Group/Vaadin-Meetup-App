@@ -41,8 +41,8 @@ public class MapView extends CssLayout implements PositionCallback,
 	public void attach() {
 		if (map == null) {
 			buildView();
-			Geolocator.detect(MapView.this);
 		}
+		Geolocator.detect(MapView.this);
 		updateMarkers();
 		setCenter();
 		super.attach();

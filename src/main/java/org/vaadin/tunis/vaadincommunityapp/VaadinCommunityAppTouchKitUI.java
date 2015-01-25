@@ -1,15 +1,22 @@
 package org.vaadin.tunis.vaadincommunityapp;
 
 import org.vaadin.tunis.vaadincommunityapp.gwt.client.VaadinCommunityAppPersistToServerRpc;
-import org.vaadin.tunis.vaadincommunityapp.ui.HomeUIBuilder;
+import org.vaadin.tunis.vaadincommunityapp.ui.AddonsView;
+import org.vaadin.tunis.vaadincommunityapp.ui.BlogsView;
+import org.vaadin.tunis.vaadincommunityapp.ui.HomeView;
+import org.vaadin.tunis.vaadincommunityapp.ui.MeetupsView;
 
 import com.vaadin.addon.touchkit.annotations.CacheManifestEnabled;
 import com.vaadin.addon.touchkit.annotations.OfflineModeEnabled;
 import com.vaadin.addon.touchkit.extensions.OfflineMode;
+import com.vaadin.addon.touchkit.ui.NavigationManager;
+import com.vaadin.addon.touchkit.ui.TabBarView;
 import com.vaadin.annotations.PreserveOnRefresh;
 import com.vaadin.annotations.Theme;
 import com.vaadin.annotations.Widgetset;
+import com.vaadin.server.FontAwesome;
 import com.vaadin.server.VaadinRequest;
+import com.vaadin.ui.TabSheet.Tab;
 import com.vaadin.ui.UI;
 
 /**
@@ -42,7 +49,25 @@ public class VaadinCommunityAppTouchKitUI extends UI {
 	@Override
 	protected void init(VaadinRequest request) {
 
-		HomeUIBuilder.initHomeScreen(this);
+		final TabBarView tabBarView = new TabBarView();
+		
+		HomeView homeView = new HomeView();
+		Tab tab;
+		tab = tabBarView.addTab(homeView);
+		tab.setIcon(FontAwesome.HOME);
+		tab = tabBarView.addTab(new BlogsView(), "Blogs");
+		tab.setIcon(FontAwesome.RSS);
+		tab = tabBarView.addTab(new AddonsView(), "Addons");
+		tab.setIcon(FontAwesome.PUZZLE_PIECE);
+		
+		final NavigationManager meetupsViewNavigationManager = new NavigationManager();
+		meetupsViewNavigationManager.setCaption("Meetups");
+		MeetupsView meetupView = new MeetupsView(homeView);
+		meetupsViewNavigationManager.setCurrentComponent(meetupView);
+
+		tab = tabBarView.addTab(meetupsViewNavigationManager, "Meetups");
+		tab.setIcon(FontAwesome.GROUP);
+		setContent(tabBarView);
 
 		// Use of the OfflineMode connector is optional.
 		OfflineMode offlineMode = new OfflineMode();

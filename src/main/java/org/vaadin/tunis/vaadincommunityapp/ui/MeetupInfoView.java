@@ -16,7 +16,6 @@ import com.vaadin.server.FontAwesome;
 import com.vaadin.server.ThemeResource;
 import com.vaadin.shared.ui.label.ContentMode;
 import com.vaadin.ui.AbsoluteLayout;
-import com.vaadin.ui.Alignment;
 import com.vaadin.ui.Button;
 import com.vaadin.ui.Button.ClickEvent;
 import com.vaadin.ui.Button.ClickListener;
@@ -25,6 +24,8 @@ import com.vaadin.ui.HorizontalLayout;
 import com.vaadin.ui.Label;
 import com.vaadin.ui.Notification;
 import com.vaadin.ui.Notification.Type;
+import com.vaadin.ui.TabSheet;
+import com.vaadin.ui.TabSheet.Tab;
 
 @SuppressWarnings("serial")
 public class MeetupInfoView extends NavigationView {
@@ -40,18 +41,19 @@ public class MeetupInfoView extends NavigationView {
 	List<Events> meetupPassedEvents = new ArrayList<Events>();
 	List<Events> meetupUpCommingEvents = new ArrayList<Events>();
 	final VerticalComponentGroup content = new VerticalComponentGroup();
+	final TabSheet tabSheet = new TabSheet();
 
 	public MeetupInfoView(Group meetup) {
 		this.meetupGroup = meetup;
 		setSizeFull();
 		setCaption(meetup.getName());
-		initToolbar();
-		setToolbar(toolbar);
-		setContent(content);
+		setContent(tabSheet);
 		initBody();
 	}
 
 	private void initBody() {
+		tabSheet.setSizeFull();
+		tabSheet.addStyleName("material-design");
 		content.setSizeFull();
 		AbsoluteLayout headerLayout = initHeaderLayout();
 
@@ -63,6 +65,10 @@ public class MeetupInfoView extends NavigationView {
 		content.addComponent(headerInfoLayout);
 		content.addComponent(bodyLayout);
 		content.setHeightUndefined();
+		Tab tab;
+		tab = tabSheet.addTab(content, "Info", FontAwesome.INFO_CIRCLE);
+		tab = tabSheet.addTab(new MeetupPhotosView(meetupGroup), "Photos",
+				FontAwesome.PHOTO);
 	}
 
 	/**
@@ -83,28 +89,67 @@ public class MeetupInfoView extends NavigationView {
 	private HorizontalLayout initHeaderInfoLayout() {
 		HorizontalLayout headerInfoLayout = new HorizontalLayout();
 
-		Label passedEvent = new Label();
-		passedEvent.setContentMode(ContentMode.HTML);
-		passedEvent.setValue("<center>" + passedEventContent + "<br>"
-				+ getPassedEvents() + "</center>");
-		passedEvent.addStyleName("bottom-decorated-label");
-		passedEvent.addStyleName("passed-event-label");
+		Button passedEvent = new Button();
+		passedEvent.setHtmlContentAllowed(true);
+		passedEvent.setCaption(FontAwesome.CALENDAR_O.getHtml() + "<br>" + getPassedEvents());
 		passedEvent.setHeight("60px");
-		Label membersNumber = new Label();
-		membersNumber.setContentMode(ContentMode.HTML);
-		membersNumber.setValue("<center>" + membersContent + "<br>"
-				+ getMeetupMember() + "</center>");
-		membersNumber.addStyleName("bottom-decorated-label");
-		membersNumber.addStyleName("members-number-label");
-		membersNumber.setHeight("60px");
+		passedEvent.addStyleName("material-design");
+		// passedEvent.addStyleName("v-button-blue");
 
-		Label incomingEvent = new Label();
-		incomingEvent.setContentMode(ContentMode.HTML);
-		incomingEvent.setValue("<center>" + incomingEventContent + "<br>"
-				+ getUpcomingEvents() + "</center>");
-		incomingEvent.addStyleName("bottom-decorated-label");
-		incomingEvent.addStyleName("upcoming-event-label");
+		Button membersNumber = new Button();
+		membersNumber.setHtmlContentAllowed(true);
+		membersNumber.setCaption(FontAwesome.USER.getHtml() + "<br>" + getMeetupMember());
+		membersNumber.setHeight("60px");
+		membersNumber.addStyleName("material-design");
+		// membersNumber.addStyleName("v-button-green");
+
+		Button incomingEvent = new Button();
+		incomingEvent.setHtmlContentAllowed(true);
+		incomingEvent.setCaption(FontAwesome.CALENDAR.getHtml() + "<br>"
+				+ getUpcomingEvents());
 		incomingEvent.setHeight("60px");
+		incomingEvent.addStyleName("material-design");
+		// incomingEvent.addStyleName("v-button-purple");
+
+		passedEvent.addClickListener(new ClickListener() {
+			@Override
+			public void buttonClick(ClickEvent event) {
+				if (meetupPassedEvents.isEmpty()) {
+					Notification.show(
+							"No passed events for " + meetupGroup.getName(),
+							Type.WARNING_MESSAGE);
+				} else {
+					getNavigationManager()
+							.navigateTo(
+									new MeetupEventView(meetupPassedEvents,
+											meetupGroup));
+				}
+			}
+		});
+		membersNumber.addClickListener(new ClickListener() {
+
+			@Override
+			public void buttonClick(ClickEvent event) {
+				getNavigationManager().navigateTo(
+						new MembersView(meetupMembers));
+			}
+		});
+
+		incomingEvent.addClickListener(new ClickListener() {
+
+			@Override
+			public void buttonClick(ClickEvent event) {
+				if (meetupUpCommingEvents.isEmpty()) {
+					Notification.show(
+							"No upcoming events for " + meetupGroup.getName(),
+							Type.WARNING_MESSAGE);
+				} else {
+					getNavigationManager().navigateTo(
+							new MeetupEventView(meetupUpCommingEvents,
+									meetupGroup));
+				}
+			}
+		});
 
 		headerInfoLayout.addComponent(passedEvent);
 		headerInfoLayout.addComponent(membersNumber);
@@ -114,15 +159,8 @@ public class MeetupInfoView extends NavigationView {
 		headerInfoLayout.setExpandRatio(membersNumber, 1.0f);
 		headerInfoLayout.setExpandRatio(incomingEvent, 1.0f);
 
-		headerInfoLayout.setComponentAlignment(passedEvent,
-				Alignment.MIDDLE_CENTER);
-		headerInfoLayout.setComponentAlignment(membersNumber,
-				Alignment.MIDDLE_CENTER);
-		headerInfoLayout.setComponentAlignment(incomingEvent,
-				Alignment.MIDDLE_CENTER);
-
 		headerInfoLayout.setWidth("100%");
-		headerInfoLayout.setHeight("60px");
+		headerInfoLayout.setHeight("65px");
 		headerInfoLayout.setSpacing(false);
 
 		return headerInfoLayout;
@@ -204,11 +242,12 @@ public class MeetupInfoView extends NavigationView {
 		Button photoButton = new Button("Photo");
 		photoButton.setIcon(FontAwesome.PHOTO);
 		photoButton.addClickListener(new ClickListener() {
-			
+
 			@Override
 			public void buttonClick(ClickEvent event) {
-				getNavigationManager().navigateTo(new MeetupPhotosView(meetupGroup));
-				
+				getNavigationManager().navigateTo(
+						new MeetupPhotosView(meetupGroup));
+
 			}
 		});
 		toolbar.addComponent(photoButton);

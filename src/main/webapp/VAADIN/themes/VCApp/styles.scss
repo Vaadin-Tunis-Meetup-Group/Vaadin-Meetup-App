@@ -4,8 +4,6 @@
 	border-radius: 50%;
 	-webkit-border-radius: 50%;
 	-moz-border-radius: 50%;
-	-webkit-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
-	-moz-box-shadow: 0 0 8px rgba(0, 0, 0, .8);
 }
 /* Position icon right of the link caption. */
 .icon-after-caption {
@@ -20,7 +18,7 @@
 	text-decoration: none !important;
 }
 
-.bottom-decorated-label{
+.bottom-decorated-label {
 	border-image: none;
 	border-left: 0px solid #F5F5F5;
 	border-right: 0px solid #F5F5F5;
@@ -28,58 +26,62 @@
 	border-style: solid;
 }
 
-.left-decorated-label{
+.left-decorated-label {
 	border-image: none;
 	border-right: 0px solid #F5F5F5;
 	border-top: 0px solid #F5F5F5;
 	border-bottom: 0px solid #F5F5F5;
 	border-style: solid;
 }
-.upcoming-event-left-decorated-label{
+
+.upcoming-event-left-decorated-label {
 	border-left: 5px solid #E14F52;
 	background: white !important;
 }
 
-.passed-event-label{
+.passed-event-label {
 	border-bottom: 4px solid #CD5F98;
 }
 
-.members-number-label{
+.members-number-label {
 	border-bottom: 4px solid #C87D34;
 }
 
-.upcoming-event-label{
+.upcoming-event-label {
 	border-bottom: 4px solid #03A52A;
 }
 
-.gray-background{
+.gray-background {
 	background: #F4F4F4 !important;
 }
 
-.white-background{
+.white-background {
 	background: #1E1913 !important;
 }
-.close-button-background{
+
+.close-button-background {
 	background: #1E1913 !important;
 }
-.gray-background .v-touchkit-componentgroup-row:before{
+
+.gray-background .v-touchkit-componentgroup-row:before {
 	border-top: 0px solid !important;
 }
 
 .v-touchkit-popover .closelabel {
 	margin-top: 10px;
 	text-align: center;
-	color:#FF9900;
+	color: #FF9900;
 }
 
 .mapview {
 	padding: 0 !important;
 }
+
 .mapview .locatebutton {
 	position: absolute;
 	top: 10px;
 	right: 10px;
-	background: #1E1913;
+	background: #00b4f0;
 	border: none;
 	border-radius: 2px;
 	-webkit-box-shadow: none;
@@ -93,22 +95,36 @@
 	border-radius: 4px;
 }
 
-.v-touchkit-navbar{
-	background: #1E1913 !important;
+.v-button.v-widget.locatebutton.v-button-locatebutton {
+	color: white;
 }
-.v-touchkit-toolbar .v-button{
-	background: #1E1913 !important;
+
+.v-button.v-widget.selected.v-button-selected {
+	color: #EFFB41 !important;
 }
+
+.v-touchkit-navbar {
+	background: #00b4f0 !important;
+}
+
 .v-touchkit-toolbar .v-button {
-	color: #FF9900 !important;
+	background: #00b4f0 !important;
 }
-.v-touchkit-navbutton-forward, .v-touchkit-navbar .v-touchkit-navbutton{
-	color:white !important;
+
+.v-touchkit-toolbar .v-button {
+	color: white !important;
 }
-.v-touchkit-navbar .v-touchkit-navbar-caption{
-	color:#FF9900 !important;
+
+.v-touchkit-navbutton-forward, .v-touchkit-navbar .v-touchkit-navbutton
+	{
+	color: white !important;
 }
-.mapview .locatebutton .v-button-wrap:BEFORE{
+
+.v-touchkit-navbar .v-touchkit-navbar-caption {
+	color: white !important;
+}
+
+.mapview .locatebutton .v-button-wrap:BEFORE {
 	color: #fff;
 	position: fixed;
 	left: 3px;
@@ -116,4 +132,53 @@
 	font-size: 24px;
 	font-weight: normal;
 	text-shadow: none;
+}
+
+.v-tabsheet-tabitem .v-caption, .v-tabsheet-tabcontainer tr,
+	.v-tabsheet-tabcontainer tbody {
+	width: 100% !important;
+}
+
+.v-tabsheet-tabitem .v-caption {
+	text-align: center;
+}
+
+.v-tabsheet-tabcontainer td {
+	width: 50% !important;
+}
+
+.v-tabsheet-tabitem-selected {
+	border-bottom: 4px solid #ee7c08 !important;
+}
+
+.material-design .v-tabsheet-tabitem {
+	border-top: none !important;
+	border-left: none !important;
+	border-right: none !important;
+}
+
+.material-design .v-tabsheet-tabitem {
+	border: none;
+}
+
+.v-button-material-design {
+	transition: box-shadow 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+	transition-delay: 0.2s;
+	box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.26) !important;
+}
+
+.v-button-blue {
+	background-color: #4285f4 !important;
+}
+
+.v-button-green {
+	background-color: #0f9d58 !important;
+}
+
+.v-button-purple {
+	background-color: #E61875 !important;
+}
+
+.v-button-green, .v-button-purple, .v-button-blue {
+	color: #fff !important;
 }
