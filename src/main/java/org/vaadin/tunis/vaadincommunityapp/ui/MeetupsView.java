@@ -25,15 +25,19 @@ public class MeetupsView extends NavigationView {
 	final VerticalComponentGroup content = new VerticalComponentGroup();
 	List<Group> allVaadinMeetups = new ArrayList<Group>();
 	private HomeView homeView;
+	private boolean rendred = false;
 
 	@Override
 	public void attach() {
-
-		createMeetupsView();
+		if (!rendred) {
+			createMeetupsView();
+			rendred = true;
+		}
 		super.attach();
 	}
 
 	private void createMeetupsView() {
+
 		if (homeView != null) {
 			allVaadinMeetups = homeView.getMapView().getAllVaadinMeetups();
 		}
